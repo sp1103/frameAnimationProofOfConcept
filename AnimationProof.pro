@@ -10,10 +10,12 @@ CONFIG += c++17
 
 SOURCES += \
     main.cpp \
-    editorproof.cpp
+    editorproof.cpp \
+    timeline.cpp
 
 HEADERS += \
-    editorproof.h
+    editorproof.h \
+    timeline.h
 
 FORMS += \
     editorproof.ui
