@@ -1,7 +1,7 @@
 #include "editorproof.h"
 #include "ui_editorproof.h"
 
-EditorProof::EditorProof(QWidget *parent)
+EditorProof::EditorProof(Timeline& timeline, QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::EditorProof)
 {
