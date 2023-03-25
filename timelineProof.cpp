@@ -35,15 +35,21 @@ void Timelineproof::setFrame(unsigned int size) {
 }
 
 void Timelineproof::changeFrameRate(int newFrameRate) {
+    if (frameRate == 0) {
+        loopActive = false;
+        stopLoop();
+    }
+    else if (frameRate != 0 && loopActive==false) {
+        loopActive = true;
+        startAnimationLoop();
+    }
     frameRate = newFrameRate;
 }
 
 void Timelineproof::startAnimationLoop() {
-    if (frameRate == 0) {
-        startAnimationLoop(); //We don't want anything to happen when frame rate is 0
-    }
+    //Note: Adding infinite loops will cause the program to crash
     int framen = 0;
-    while (framen < frames.size()) {
+    while (framen < frames.size() && loopActive == true) {
         double millisecondsBetweenFrames = 1000/(double)frameRate;
         QTimer::singleShot(millisecondsBetweenFrames + (framen*millisecondsBetweenFrames), this, &Timelineproof::sendFrame);
         framen++;
@@ -51,6 +57,9 @@ void Timelineproof::startAnimationLoop() {
 }
 
 void Timelineproof::sendFrame() {
+    if (loopActive == false) {
+        return; //Stop loop if not active
+    }
     activeFrame = frames[frameIndex];
     activeImage = activeFrame.getLayer();
     frameIndex++;
@@ -59,4 +68,10 @@ void Timelineproof::sendFrame() {
         frameIndex = 0;
         startAnimationLoop();
     }
+}
+
+void Timelineproof::stopLoop() {
+    activeFrame = frames[frameIndex];
+    activeImage = activeFrame.getLayer();
+    emit setImage(activeImage);
 }

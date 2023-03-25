@@ -21,11 +21,13 @@ private:
     unsigned int sizeX;
     unsigned int sizeY;
     bool onionSkinEnabled;
+    bool loopActive = true;
     int frameIndex;
 public slots:
     void changeFrameRate(int newFrameRate);
     void sendFrame();
     void startAnimationLoop();
+    void stopLoop();
 signals:
     void setImage(QImage image);
 };
