@@ -14,6 +14,10 @@ EditorProof::EditorProof(Timelineproof& timeline, QWidget *parent)
             &Timelineproof::setImage,
             this,
             &EditorProof::changeImage);
+    connect(ui->playButton,
+            &QPushButton::clicked,
+            &timeline,
+            &Timelineproof::startAnimationLoop);
 
     //Just default image for size reference
     QImage defaultImage(":/img/img/Image1.png");
