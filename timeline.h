@@ -2,9 +2,10 @@
 #define TIMELINE_H
 
 #include <QObject>
+#include <QDebug>
 #include "frame.h"
 
-class Timeline
+class Timeline : public QObject
 {
 public:
     Timeline();
@@ -19,6 +20,8 @@ private:
     unsigned int sizeX;
     unsigned int sizeY;
     bool onionSkinEnabled;
+public slots:
+    void changeFrameRate(int newFrameRate);
 };
 
 #endif // TIMELINE_H

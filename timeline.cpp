@@ -25,3 +25,8 @@ void Timeline::setFrame(unsigned int size) {
     sizeX = size;
     sizeY = size; //Maybe something like this
 }
+
+void Timeline::changeFrameRate(int newFrameRate) {
+    qInfo()<<frameRate;
+    frameRate = newFrameRate;
+}
