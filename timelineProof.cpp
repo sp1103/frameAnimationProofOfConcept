@@ -39,9 +39,13 @@ void Timelineproof::changeFrameRate(int newFrameRate) {
 }
 
 void Timelineproof::startAnimationLoop() {
+    if (frameRate == 0) {
+        startAnimationLoop(); //We don't want anything to happen when frame rate is 0
+    }
     int framen = 0;
     while (framen < frames.size()) {
-        QTimer::singleShot(frameRate*100 + (framen * (frameRate*100)), this, &Timelineproof::sendFrame);
+        double millisecondsBetweenFrames = 1000/(double)frameRate;
+        QTimer::singleShot(millisecondsBetweenFrames + (framen*millisecondsBetweenFrames), this, &Timelineproof::sendFrame);
         framen++;
     }
 }
