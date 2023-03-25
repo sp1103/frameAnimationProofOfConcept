@@ -1,7 +1,7 @@
 #include "editorproof.h"
 #include "ui_editorproof.h"
 
-EditorProof::EditorProof(Timeline& timeline, QWidget *parent)
+EditorProof::EditorProof(Timelineproof& timeline, QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::EditorProof)
 {
@@ -9,17 +9,29 @@ EditorProof::EditorProof(Timeline& timeline, QWidget *parent)
     connect(ui->frameRateSlider,
             &QSlider::sliderMoved,
             &timeline,
-            &Timeline::changeFrameRate);
+            &Timelineproof::changeFrameRate);
+    connect(&timeline,
+            &Timelineproof::setImage,
+            this,
+            &EditorProof::changeImage);
 
     //Just default image for size reference
-    QPixmap defaultImgae(":/img/img/Image1.png");
+    QImage defaultImage(":/img/img/Image1.png");
+    QPixmap defaultMap(QPixmap::fromImage(defaultImage));
     int width = ui->imageLabel->width();
     int height = ui->imageLabel->height();
-    ui->imageLabel->setPixmap(defaultImgae.scaled(width, height, Qt::KeepAspectRatio));
+    ui->imageLabel->setPixmap(defaultMap.scaled(width, height, Qt::KeepAspectRatio));
 }
 
 EditorProof::~EditorProof()
 {
     delete ui;
+}
+
+void EditorProof::changeImage(QImage image) {
+    QPixmap currentImage(QPixmap::fromImage(image));
+    int width = ui->imageLabel->width();
+    int height = ui->imageLabel->height();
+    ui->imageLabel->setPixmap(currentImage.scaled(width, height, Qt::KeepAspectRatio));
 }
 

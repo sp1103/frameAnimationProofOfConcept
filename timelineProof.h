@@ -1,14 +1,15 @@
-#ifndef TIMELINE_H
-#define TIMELINE_H
+#ifndef TIMELINEPROOF_H
+#define TIMELINEPROOF_H
 
 #include <QObject>
 #include <QDebug>
 #include "frame.h"
 
-class Timeline : public QObject
+class Timelineproof : public QObject
 {
+    Q_OBJECT
 public:
-    Timeline();
+    explicit Timelineproof(QObject *parent = nullptr); //Note: calling class timeline causes issues
     void addFrame();
     void deleteFrame();
     void setFrame(unsigned int size);
@@ -22,6 +23,8 @@ private:
     bool onionSkinEnabled;
 public slots:
     void changeFrameRate(int newFrameRate);
+signals:
+    void setImage(QImage image);
 };
 
-#endif // TIMELINE_H
+#endif // TIMELINEPROOF_H

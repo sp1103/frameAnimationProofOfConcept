@@ -2,7 +2,7 @@
 #define EDITORPROOF_H
 
 #include <QMainWindow>
-#include "timeline.h"
+#include "timelineProof.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class EditorProof; }
@@ -13,9 +13,10 @@ class EditorProof : public QMainWindow
     Q_OBJECT
 
 public:
-    EditorProof(Timeline& timeline, QWidget *parent = nullptr);
+    EditorProof(Timelineproof& timeline, QWidget *parent = nullptr);
     ~EditorProof();
-
+public slots:
+    void changeImage(QImage image);
 private:
     Ui::EditorProof *ui;
 };

@@ -12,12 +12,12 @@ SOURCES += \
     frame.cpp \
     main.cpp \
     editorproof.cpp \
-    timeline.cpp
+    timelineProof.cpp
 
 HEADERS += \
     editorproof.h \
     frame.h \
-    timeline.h
+    timelineProof.h
 
 FORMS += \
     editorproof.ui

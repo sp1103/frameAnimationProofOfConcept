@@ -1,11 +1,14 @@
-#include "timeline.h"
+#include "timelineproof.h"
 
-Timeline::Timeline()
+Timelineproof::Timelineproof(QObject *parent) : QObject(parent)
 {
-
+    Frame img1;
+    Frame img2;
+    img1.addLayer(QImage(":/img/img/Image1.png"));
+    img2.addLayer(QImage(":/img/img/Image2.png"));
 }
 
-void Timeline::addFrame() {
+void Timelineproof::addFrame() {
     if (frames.size() == 20) { //Some max to be decided
         //Show error message
     }
@@ -13,19 +16,19 @@ void Timeline::addFrame() {
     frames.push_back(newFrame); //Otherwise add new frame
 }
 
-void Timeline::deleteFrame() {
+void Timelineproof::deleteFrame() {
     if (frames.size() == 1) { //Minimum of 1 frame
         //Show error message
     }
     frames.pop_back(); //Can only delete frame created most recently at this point
 }
 
-void Timeline::setFrame(unsigned int size) {
+void Timelineproof::setFrame(unsigned int size) {
     //Not sure what you want here
     sizeX = size;
     sizeY = size; //Maybe something like this
 }
 
-void Timeline::changeFrameRate(int newFrameRate) {
+void Timelineproof::changeFrameRate(int newFrameRate) {
     frameRate = newFrameRate;
 }
